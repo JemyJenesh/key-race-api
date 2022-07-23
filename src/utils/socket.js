@@ -9,7 +9,7 @@ export const initSocket = (server) => {
       socket.join(game._id);
     });
     socket.on("playerJoined", async ({ game, player }) => {
-      const gameId = game._id;
+      const gameId = game?._id;
       socket.join(gameId);
       const updatedGame = await gameService.get(gameId);
       io.to(gameId).emit("gameUpdated", updatedGame);
