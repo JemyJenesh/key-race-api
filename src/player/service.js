@@ -8,22 +8,19 @@ const get = async (id) => {
   return await Player.findById(id);
 };
 
-// const update = async (id, { hasStarted, isOver, player }) => {
-//   await Game.findByIdAndUpdate(id, {
-//     hasStarted,
-//     isOver,
-//     $push: {
-//       players: player,
-//     },
-//   });
+const update = async (id, { speed, wordIndex }) => {
+  await Player.findByIdAndUpdate(id, {
+    speed,
+    wordIndex,
+  });
 
-//   return await get(id);
-// };
+  return await get(id);
+};
 
 const playerService = {
   create,
   get,
-  // update,
+  update,
 };
 
 export default playerService;

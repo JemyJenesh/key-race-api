@@ -5,7 +5,12 @@ import { getData } from "../utils/quotable";
 const create = async (playerId) => {
   const words = await getData();
   const player = await Player.findById(playerId);
-  return await Game.create({ words, createdBy: playerId, players: [player] });
+  return await Game.create({
+    words,
+    createdBy: playerId,
+    players: [player],
+    startTime: new Date().getTime(),
+  });
 };
 
 const get = async (id) => {
