@@ -9,6 +9,18 @@ export const initSocket = (server) => {
       socket.join(game._id);
     });
 
+    socket.on("start", async (game) => {
+      const gameId = game?._id;
+
+      socket.join(gameId);
+
+      const updatedGame = await gameService.update(gameId, {
+        hasStarted: true,
+      });
+
+      io.to(gameId).emit("gameUpdated", updatedGame);
+    });
+
     socket.on("playerJoined", async (game) => {
       const gameId = game?._id;
       socket.join(gameId);
